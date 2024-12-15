@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="LSDIR Dataset: A Large Scale Dataset for Image Restoration.">
+  <meta name="keywords" content="image SR, image denoising, JPEG compression artifacts removal, image deblurring, image demosaicking, real-world SR">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LSDIR Dataset: A Large Scale Dataset for Image Restoration</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<!--  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>-->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+<!--  <div class="navbar-menu">-->
+<!--    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">-->
+<!--      <a class="navbar-item" href="https://keunhong.com">-->
+<!--      <span class="icon">-->
+<!--          <i class="fas fa-home"></i>-->
+<!--      </span>-->
+<!--      </a>-->
+
+<!--      <div class="navbar-item has-dropdown is-hoverable">-->
+<!--        <a class="navbar-link">-->
+<!--          More Research-->
+<!--        </a>-->
+<!--        <div class="navbar-dropdown">-->
+<!--          <a class="navbar-item" href="https://hypernerf.github.io">-->
+<!--            HyperNeRF-->
+<!--          </a>-->
+<!--          <a class="navbar-item" href="https://nerfies.github.io">-->
+<!--            Nerfies-->
+<!--          </a>-->
+<!--          <a class="navbar-item" href="https://latentfusion.github.io">-->
+<!--            LatentFusion-->
+<!--          </a>-->
+<!--          <a class="navbar-item" href="https://photoshape.github.io">-->
+<!--            PhotoShape-->
+<!--          </a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">LSDIR Dataset: A Large Scale Dataset for Image Restoration</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://ofsoundof.github.io/">Yawei Li</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://cszn.github.io/">Kai Zhang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://jingyunliang.github.io/">Jingyun Liang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.jiezhangcao.com/">Jiezhang Cao</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://vision.ee.ethz.ch/people-details.MjYzNDA1.TGlzdC8zMjg5LC0xOTcxNDY1MTc4.html">Ce Liu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://ethruigong.github.io/">Rui Gong</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://yulunzhang.com/">Yulun Zhang</a><sup>1</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://ha0tang.github.io/">Hao Tang</a><sup>1</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://yun-liu.github.io/">Yun Liu</a><sup>1</sup>
+            </span>
+            <span class="author-block">
+              <a href="">Denis Demandolx</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="">Rakesh Ranjan</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="http://www.vision.ee.ethz.ch/~timofter/">Radu Timofte</a><sup>1,3</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://vision.ee.ethz.ch/people-details.OTAyMzM=.TGlzdC8zMjQ4LC0xOTcxNDY1MTc4.html">Luc Van Gool</a><sup>1,4</sup>
+            </span>
+
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>ETH Zürich,</span>
+            <span class="author-block"><sup>2</sup>Reality Labs, Meta,</span>
+            <span class="author-block"><sup>3</sup>University of Würzburg,</span>
+            <span class="author-block"><sup>4</sup>KU Leuven</span>
+
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (coming soon)</span>
+                </a>
+              </span>
+<!--              <span class="link-block">-->
+<!--                <a href="https://arxiv.org/abs/2011.12948"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="ai ai-arxiv"></i>-->
+<!--                  </span>-->
+<!--                  <span>arXiv</span>-->
+<!--                </a>-->
+<!--              </span>-->
+<!--              &lt;!&ndash; Video Link. &ndash;&gt;-->
+<!--              <span class="link-block">-->
+<!--                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="fab fa-youtube"></i>-->
+<!--                  </span>-->
+<!--                  <span>Video</span>-->
+<!--                </a>-->
+<!--              </span>-->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/ofsoundof/LSDIR"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+<!--              &lt;!&ndash; Dataset Link. &ndash;&gt;-->
+<!--              <span class="link-block">-->
+<!--                <a href="https://github.com/google/nerfies/releases/tag/0.1"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="far fa-images"></i>-->
+<!--                  </span>-->
+<!--                  <span>Data</span>-->
+<!--                  </a>-->
+<!--            </div>-->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+<!--      <video id="teaser" autoplay muted loop playsinline height="100%">-->
+<!--        <source src="./static/images/example_image.png"-->
+<!--                type="video/mp4">-->
+<!--      </video>-->
+      <img src="./static/images/example_image.jpg"
+           class="interpolation-image"
+           alt="Interpolation end reference image."/>
+      <h2 class="subtitle has-text-centered">
+        Example images from different image restoration datasets.
+        Images in the proposed <span class="dnerf">LSDIR</span>  dataset are in high resolution, of high quality,
+and with detailed contents.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+<!--      <video id="teaser" autoplay muted loop playsinline height="100%">-->
+<!--        <source src="./static/images/example_image.png"-->
+<!--                type="video/mp4">-->
+<!--      </video>-->
+      <img src="./static/images/example_lsdir.png"
+           class="interpolation-image"
+           alt="Interpolation end reference image."/>
+      <h2 class="subtitle has-text-centered">
+        Examples of validation images from the <span class="dnerf">LSDIR</span> dataset.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!--<section class="hero is-light is-small">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      <div id="results-carousel" class="carousel results-carousel">-->
+<!--        <div class="item item-steve">-->
+<!--          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="./static/videos/steve.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-chair-tp">-->
+<!--          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="./static/videos/chair-tp.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-shiba">-->
+<!--          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="./static/videos/shiba.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-fullbody">-->
+<!--          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="./static/videos/fullbody.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-blueshirt">-->
+<!--          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="./static/videos/blueshirt.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-mask">-->
+<!--          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="./static/videos/mask.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-coffee">-->
+<!--          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="./static/videos/coffee.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-toby">-->
+<!--          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="./static/videos/toby2.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We collected a large-scale dataset for image restoration tasks such as image super-resolution (SR),
+            image denoising, JPEG deblocking, deblurring, and demosaicking,
+            and real-world SR.
+          </p>
+          <p>
+            The aim of this project is to propose a large scale
+            dataset for image restoration (<span class="dnerf">LSDIR</span>). Recent work in image restoration has focused on the design of deep neural
+            networks. The datasets used to train these networks ‘only’
+            contain some thousands of images, which is still incomparable with the large scale datasets for other vision tasks
+            such as visual recognition and object detection. The small
+            training set limits the performance of image restoration networks. To solve that problem, we collect high-resolution
+            (HR) images from Flickr for image restoration. To ensure
+            the pixel-level quality of the collected dataset, annotators
+            were invited to manually inspect each of the collected image
+            and remove the low-quality ones. The final dataset contains
+            84,991 high-quality training images, 1,000 validation images, and 1,000 test images. In addition, we showed that the
+            model capacity of large networks could be fully exploited
+            by training on the large scale dataset with significantly increased patch size and prolonged training iterations. The
+            experimental results on image SR, denoising, JPEG deblocking, deblurring, and demosaicking,
+            and real-world SR show that image restoration networks
+            benefit a lot from the large scale dataset.
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+<!--    &lt;!&ndash; Paper video. &ndash;&gt;-->
+<!--    <div class="columns is-centered has-text-centered">-->
+<!--      <div class="column is-four-fifths">-->
+<!--        <h2 class="title is-3">Video</h2>-->
+<!--        <div class="publication-video">-->
+<!--          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"-->
+<!--                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;/ Paper video. &ndash;&gt;-->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results</h2>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/ablation_patch_size.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+            <p>Different datasets with larger training patch size.</p>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/ablation_training_iteration.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+            <p>Different datasets with increased training iterations.</p>
+          </div>
+
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/patch_size.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+            <p><span class="dnerf">LSDIR</span> training with different patch sizes.</p>
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/comparison_imagenet.png"
+                 class="interpolation-image"
+                 alt="Interpolation end reference image."/>
+            <p class="is-bold">Comparison between <span class="dnerf">LSDIR</span> and ImageNet</p>
+          </div>
+        </div>
+
+
+        <h2 class="subtitle has-text-centered">
+          Comparison of validation accuracy on the Urban100 dataset between different settings. The
+experiments are done for image SR with upscaling factor ×4. ‘p*’ denotes the patch size.
+        </h2>
+
+        <br/>
+        <!--/ Interpolating. -->
+
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h2 class="title is-3">Data Overview</h2>
+        <div class="content has-text-justified">
+          <p>We are making available a large newly collected dataset -<span class="dnerf">LSDIR</span>- of RGB images with a large diversity of contents.</p>
+          <p>The <span class="dnerf">LSDIR</span> dataset is divided into:</p>
+          <ul>
+            <li>training data: 84,991 high-definition high-resolution training images. We obtain corresponding low-resolution images and provide both high and low-resolution images for 2, 3, and 4 downscaling factors.</li>
+            <li>validation data: 1,000 high-definition high-resolution validation images. The validation data will be released later.</li>
+            <!-- We obtain corresponding low-resolution images and provide both high and low-resolution images for 2, 3, and 4 downscaling factors. -->
+            <li>test data: 1,000 high-definition high-resolution test images. We obtain corresponding low-resolution images. This set is used for benchmarking purposes. Thus, only low-resolution images for 2, 3, and 4 downscaling factors are provided. The test data will be released later.</li>
+          </ul>
+        </div>
+
+        <h2 class="title is-3">Data Structure</h2>
+        <div class="content has-text-justified">
+          <h3 class="title is-4">Train</h3>
+          <p>The training data in <span class="dnerf">LSDIR</span> dataset has the following structure:</p>
+          <p>
+            &emsp;<code>LSDIR/</code> -- LSDIR dataset
+            <br />&emsp;<code>LSDIR/HR/train/00XX000/00YYYYY.png</code> -- training HR images;
+            <br />&emsp;<code>LSDIR/X2/train/00XX000/00YYYYYx2.png</code> -- training LR images, downscale factor x2;
+            <br />&emsp;<code>LSDIR/X3/train/00XX000/00YYYYYx3.png</code> -- training LR images, downscale factor x3;
+            <br />&emsp;<code>LSDIR/X4/train/00XX000/00YYYYYx4.png</code> -- training LR images, downscale factor x4;
+            <br /> <br /> where <code>XX</code> is the split ID ranging from 01 to 85.
+            The first 84 splits contains 1,000 images and the 85<sup>th</sup> split contains the rest 991 images.
+            <br /> where <code>YYYYY</code> is the image ID ranging from 00001 to 84991.
+          </p>
+          <h3 class="title is-4">Validation</h3>
+          <p>The training data in <span class="dnerf">LSDIR</span> dataset has the following structure:</p>
+          <p>
+            &emsp;<code>LSDIR/HR/val/000XXXX.png</code> -- validation HR images;
+            <br />&emsp;<code>LSDIR/X2/val/000XXXXx2.png</code> -- validation LR images, downscale factor x2;
+            <br />&emsp;<code>LSDIR/X3/val/000XXXXx3.png</code> -- validation LR images, downscale factor x3;
+            <br />&emsp;<code>LSDIR/X4/val/000XXXXx4.png</code> -- validation LR images, downscale factor x4;
+            <br /> <br /> where <code>XXXX</code> is the image ID ranging from 0001 to 1000.
+          </p>
+
+        </div>
+
+        <h2 class="title is-3">Data Access</h2>
+        <div class="content has-text-justified">
+          <ul>
+            <li><a href="https://pan.baidu.com/s/1kSQmZ2FaMQTeJIc28UUzzQ?pwd=uf4w"><strong>Download all data.</strong></a></li>
+          </ul>
+        </div>
+
+        <h3 class="title is-4">Train</h3>
+        <div class="content has-text-justified">
+          <ul>
+          <li><strong>High-Resolution Images:</strong></li>
+          <ul>
+          <li><a href="https://pan.baidu.com/s/1AEf3kdrRRZR6PzST9jMTwA?pwd=w7cj">Train Data: shard-00 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1B7OrviViPVz3KTpz9ISCcw?pwd=enft">Train Data: shard-01 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1ViQxwYGTpXstzXOdR5mU-g?pwd=mw3j">Train Data: shard-02 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1VJYGDCAODv7Ed3XkG7xt7g?pwd=bar8">Train Data: shard-03 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/18ZARCcxIZwJ1BvFxRMh5Ag?pwd=py7w">Train Data: shard-04 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1Fz_WLtJHtjNUunL-nOdIKg?pwd=8wge">Train Data: shard-05 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1n_0_5PO0GBqdd2SMfBCIIg?pwd=m6pp">Train Data: shard-06 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1OT1ug55r5jJe204Nj0Tl_Q?pwd=ey5j">Train Data: shard-07 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1YAX12BpM4wTucSKA2AelVA?pwd=tavv">Train Data: shard-08 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1mvK-3GI7CRn2ZohsVPM4rw?pwd=vxcc">Train Data: shard-09 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1GicUhERAehktazOvfQXzGw?pwd=uajm">Train Data: shard-10 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1f5JZTlxEiOryF6rXLbERdA?pwd=pfqq">Train Data: shard-11 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1WlPH11H6Qtp6sUyzcl4l1g?pwd=fihf">Train Data: shard-12 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1vlF5YOIG9KY205ICQBsz5w?pwd=7i2t">Train Data: shard-13 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1WhHmNNf33i3YS1TAuvrrdw?pwd=7sbr">Train Data: shard-14 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1DGpJSinaklee7UjxBflO_g?pwd=51a8">Train Data: shard-15 (HR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1F0HjF78QXxhpAQJ1GLQmsQ?pwd=cx3d">Train Data: shard-16 (HR images)</a></li>
+          </ul>
+
+          <li><strong>Low-Resolution Images:</strong></li>
+          <ul>
+          <li><a href="https://data.vision.ee.ethz.ch/yawli/train_x2.tar.gz">Train Data: bicubic downscaling x2 (LR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/10-oSfRvXflZZcZ4xg5tjMQ?pwd=bdy2">Train Data: bicubic downscaling x3 (LR images)</a></li>
+          <li><a href="https://pan.baidu.com/s/1KvTqF2QbundNyZhshi7yAQ?pwd=nqtu">Train Data: bicubic downscaling x4 (LR images)</a></li>
+          </ul>
+          </ul>
+        </div>
+
+        <h3 class="title is-4">Validation</h3>
+        <div class="content has-text-justified">
+          <ul>
+          <li><strong>250 validation images from the whole validation set:</strong></li>
+          <ul>
+          <li><a href="https://pan.baidu.com/s/1ffVJUOdJrOIQTwMSHiLc1A?pwd=cxee">Validation Data: 250 images for image SR (HR, X2, X3, X4 images)</a></li>
+          </ul>
+          </ul>
+        </div>
+        
+        
+        <h2 class="title is-3">How To Use?</h2>
+        <div class="content has-text-justified">
+          <p>
+            Please refer to <a href="https://github.com/ofsoundof/LSDIR">the GitHub Page.</a>
+
+          </p>
+        </div>
+        
+
+        <h2 class="title is-3">License</h2>
+        <div class="content has-text-justified">
+          <p>
+            Please notice that this dataset is made available for academic research purpose only. All collection and processing of data for LSDIR was performed by the academic co-authors.
+            All the images are collected from the Internet, and the copyright belongs to the original owners.
+            If any of the images belongs to you and you would like it removed, please kindly inform
+            <a href="mailto:yawei.li@vision.ee.ethz.ch">us</a>, we will remove it from our dataset immediately.
+
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!--<section class="section">-->
+<!--  <div class="container is-max-desktop">-->
+
+<!--    <div class="columns is-centered">-->
+
+<!--      &lt;!&ndash; Visual Effects. &ndash;&gt;-->
+<!--      <div class="column">-->
+<!--        <div class="content">-->
+<!--          <h2 class="title is-3">Visual Effects</h2>-->
+<!--          <p>-->
+<!--            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect-->
+<!--            would be impossible without nerfies since it would require going through a wall.-->
+<!--          </p>-->
+<!--          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">-->
+<!--            <source src="./static/videos/dollyzoom-stacked.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;/ Visual Effects. &ndash;&gt;-->
+
+<!--      &lt;!&ndash; Matting. &ndash;&gt;-->
+<!--      <div class="column">-->
+<!--        <h2 class="title is-3">Matting</h2>-->
+<!--        <div class="columns is-centered">-->
+<!--          <div class="column content">-->
+<!--            <p>-->
+<!--              As a byproduct of our method, we can also solve the matting problem by ignoring-->
+<!--              samples that fall outside of a bounding box during rendering.-->
+<!--            </p>-->
+<!--            <video id="matting-video" controls playsinline height="100%">-->
+<!--              <source src="./static/videos/matting.mp4"-->
+<!--                      type="video/mp4">-->
+<!--            </video>-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;/ Matting. &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Animation. &ndash;&gt;-->
+<!--    <div class="columns is-centered">-->
+<!--      <div class="column is-full-width">-->
+<!--        <h2 class="title is-3">Animation</h2>-->
+
+<!--        &lt;!&ndash; Interpolating. &ndash;&gt;-->
+<!--        <h3 class="title is-4">Interpolating states</h3>-->
+<!--        <div class="content has-text-justified">-->
+<!--          <p>-->
+<!--            We can also animate the scene by interpolating the deformation latent codes of two input-->
+<!--            frames. Use the slider here to linearly interpolate between the left frame and the right-->
+<!--            frame.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--        <div class="columns is-vcentered interpolation-panel">-->
+<!--          <div class="column is-3 has-text-centered">-->
+<!--            <img src="./static/images/interpolate_start.jpg"-->
+<!--                 class="interpolation-image"-->
+<!--                 alt="Interpolate start reference image."/>-->
+<!--            <p>Start Frame</p>-->
+<!--          </div>-->
+<!--          <div class="column interpolation-video-column">-->
+<!--            <div id="interpolation-image-wrapper">-->
+<!--              Loading...-->
+<!--            </div>-->
+<!--            <input class="slider is-fullwidth is-large is-info"-->
+<!--                   id="interpolation-slider"-->
+<!--                   step="1" min="0" max="100" value="0" type="range">-->
+<!--          </div>-->
+<!--          <div class="column is-3 has-text-centered">-->
+<!--            <img src="./static/images/interpolate_end.jpg"-->
+<!--                 class="interpolation-image"-->
+<!--                 alt="Interpolation end reference image."/>-->
+<!--            <p class="is-bold">End Frame</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <br/>-->
+<!--        &lt;!&ndash;/ Interpolating. &ndash;&gt;-->
+
+<!--        &lt;!&ndash; Re-rendering. &ndash;&gt;-->
+<!--        <h3 class="title is-4">Re-rendering the input video</h3>-->
+<!--        <div class="content has-text-justified">-->
+<!--          <p>-->
+<!--            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel-->
+<!--            viewpoint such as a stabilized camera by playing back the training deformations.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--        <div class="content has-text-centered">-->
+<!--          <video id="replay-video"-->
+<!--                 controls-->
+<!--                 muted-->
+<!--                 preload-->
+<!--                 playsinline-->
+<!--                 width="75%">-->
+<!--            <source src="./static/videos/replay.mp4"-->
+<!--                    type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;/ Re-rendering. &ndash;&gt;-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;/ Animation. &ndash;&gt;-->
+
+
+<!--    &lt;!&ndash; Concurrent Work. &ndash;&gt;-->
+<!--    <div class="columns is-centered">-->
+<!--      <div class="column is-full-width">-->
+<!--        <h2 class="title is-3">Related Links</h2>-->
+
+<!--        <div class="content has-text-justified">-->
+<!--          <p>-->
+<!--            There's a lot of excellent work that was introduced around the same time as ours.-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>-->
+<!--            both use deformation fields to model non-rigid scenes.-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;/ Concurrent Work. &ndash;&gt;-->
+
+<!--  </div>-->
+<!--</section>-->
+
+
+<!--<section class="section" id="BibTeX">-->
+<!--  <div class="container is-max-desktop content">-->
+<!--    <h2 class="title">BibTeX</h2>-->
+<!--    <pre><code>@article{park2021nerfies,-->
+<!--  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},-->
+<!--  title     = {Nerfies: Deformable Neural Radiance Fields},-->
+<!--  journal   = {ICCV},-->
+<!--  year      = {2021},-->
+<!--}</code></pre>-->
+<!--  </div>-->
+<!--</section>-->
+
+
+<footer class="footer">
+  <div class="container">
+<!--    <div class="content has-text-centered">-->
+<!--      <a class="icon-link"-->
+<!--         href="./static/videos/nerfies_paper.pdf">-->
+<!--        <i class="fas fa-file-pdf"></i>-->
+<!--      </a>-->
+<!--      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>-->
+<!--        <i class="fab fa-github"></i>-->
+<!--      </a>-->
+<!--    </div>-->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This website is borrowed from the <a
+              href="https://nerfies.github.io/">template</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
